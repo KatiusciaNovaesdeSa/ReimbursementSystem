@@ -7,6 +7,7 @@ public class ReimDTO {
 	private String username;
 	private double amount;
 	private String submitted; 
+	//private String resolved;  
 	private String description;
 	private String authorFullName;
 	private String status;
@@ -23,6 +24,10 @@ public class ReimDTO {
 		this.username = reim.getAuthor().getUsername();
 		this.amount = reim.getAmount();
 		this.submitted = reim.getSubmitted().toString();
+		
+
+		//this.resolved = reim.getResolved().toString();
+		
 		this.description = reim.getDescription();
 		this.authorFullName = reim.getAuthor().getFirstName() + " " + reim.getAuthor().getLastName();
 		this.status = reim.getStatus().getStatus();
@@ -106,6 +111,19 @@ public class ReimDTO {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+
+	
+
+//
+//	public String getResolved() {
+//		return resolved;
+//	}
+//
+//
+//	public void setResolved(String resolved) {
+//		this.resolved = resolved;
+//	}
 	
 
 }

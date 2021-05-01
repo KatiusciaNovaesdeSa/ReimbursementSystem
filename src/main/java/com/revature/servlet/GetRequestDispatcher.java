@@ -16,6 +16,10 @@ public class GetRequestDispatcher {
 				return ViewAllUserReimController.get(req);
 			case "/ReimbursementSystem/viewPending.ers":
 				return ViewPendingController.get(req);
+			case "/ReimbursementSystem/viewApproved.ers":
+				return ViewApprovedController.get(req);
+			case "/ReimbursementSystem/viewDenied.ers":
+				return ViewDeniedController.get(req);
 			default:
 				return "html/nosuccesslogin";
 		}

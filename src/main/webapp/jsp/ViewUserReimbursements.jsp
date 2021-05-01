@@ -7,19 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <title>User reimbursements</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
- <div align="center">
-        <table border="1" cellpadding="5">
-            <caption><h2>List of all Reimbursements <c:out value="${reimbursement.authorFullName}" /></h2></caption>
-           
+<br><br>
+ <div align="center" class="container">
+       <!-- <table border="1" cellpadding="5">  --> 
+       <caption><h2>List of All Reimbursements <c:out value="${reimbursement.authorFullName}" /></h2></caption>      
+        <table class="table table-striped table-success table-hover">
+            
             <tr>
-                <th>Amount</th>
-                <th>Date submitted</th>
-                <th>Description</th>
-                <th>Author full name</th>
-                <th>Status</th>
-                <th>Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date submitted</th>
+                <th scope="col">Description</th>
+                <th scope="col">Author Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Type</th>
             </tr>
             <c:forEach var="reimbursement" items="${reimbursements}">
                 <tr>

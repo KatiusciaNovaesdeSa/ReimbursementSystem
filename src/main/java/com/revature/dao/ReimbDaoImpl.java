@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+
+import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.revature.model.Login;
@@ -14,17 +16,17 @@ import com.revature.model.Role;
 import com.revature.model.Status;
 import com.revature.model.Type;
 import com.revature.model.User;
-import com.revature.util.DBConnection;
 import com.revature.util.Log;
 import com.revature.util.ReimConnection;
 
 import java.util.List;
 
-import org.postgresql.core.ConnectionFactory;
 
 import java.util.ArrayList;
  
 public class ReimbDaoImpl {
+	
+	 private Logger log = Logger.getRootLogger();
 	
 
 	Connection connection = ReimConnection.getConnection();
@@ -54,11 +56,10 @@ public boolean addReimbursementRequest(Reimbursement request) {
 
 	PreparedStatement preparedStatement;
 	
-//	Connection connection = DBConnection.createConnection();  BEFORE
 	
 	Connection connection = ReimConnection.getConnection();
 	
-	//log.info("Creating a new account");
+	log.info("Creating a new reimbursement request");
 	
 	
 	try {
@@ -82,6 +83,7 @@ public boolean addReimbursementRequest(Reimbursement request) {
 	}
 	catch (SQLException e) {
 		e.printStackTrace();
+		Log.logger.warn("Exception to view all Reimbursment", e);
 	}
 	return false;
 }
@@ -89,7 +91,10 @@ public boolean addReimbursementRequest(Reimbursement request) {
 
 //view reimburse requests owned by employee
 public List<Reimbursement> viewReimbursementRequests(User user){
-	//try(Connection connection = DBConnection.createConnection()) {  BEFORE
+	
+	log.info("View reimbursement request by user");
+	
+	
 	try(Connection connection = ReimConnection.getConnection()) {
 		
 		String command = "SELECT * FROM ers_reimbursement where reimb_author = ?";
@@ -100,20 +105,7 @@ public List<Reimbursement> viewReimbursementRequests(User user){
 
 		List<Reimbursement> reimbursmentList = new ArrayList<>();
 		mapReimbursements(result, reimbursmentList);
-		/*
-		 * while(result.next()) { System.out.println("next Result  in DB " +
-		 * result.getInt("reimb_id")); reimbursmentList.add(new Reimbursement(
-		 * result.getInt("reimb_id"), result.getDouble("reimb_amount"),
-		 * result.getTimestamp("reimb_submitted"),
-		 * result.getTimestamp("reimb_resolved"),
-		 * getUser(result.getInt("reimb_author")),
-		 * result.getString("reimb_description"),
-		 * getStatus(result.getInt("reimb_status")),
-		 * getType(result.getInt("reimb_type")) // result.getString("user_first_name");
-		 * // result.getString("user_last_name"); // result.getString("user_email"); ));
-		 * }
-		 */
-		//int id, double amount, Timestamp submitted, Timestamp resolved, User author, Status status, Type type
+		
 		return reimbursmentList;
 	} catch (SQLException e) {
 		Log.logger.warn("Exception selecting all Reimbursment", e);
@@ -130,8 +122,11 @@ public boolean updateReimbursementStatus(User financePerson, Reimbursement reque
 
 	PreparedStatement preparedStatement;
 	int result = -1;
+	
+	log.info("Updating reimbursement request");
+	
+	
 	try {	
-		//Connection connection = DBConnection.createConnection();  BEFORE
 		Connection connection = ReimConnection.getConnection();
 		
 		preparedStatement = connection.prepareStatement(sql);
@@ -151,14 +146,13 @@ public boolean updateReimbursementStatus(User financePerson, Reimbursement reque
 
 
 public List<Reimbursement> viewAllReimbursementRequests(Status status){
-	String sql = "SELECT * FROM ers_reimbursement where reimb_status_id = ?";
+  String sql = "SELECT * FROM ers_reimbursement where reimb_status_id = ?";
 
   PreparedStatement preparedStatement;
 	
-//	Connection connection = DBConnection.createConnection(); BEFORE
   Connection connection = ReimConnection.getConnection();
 	
-	//log.info("Creating a new account");
+	log.info("View all reimbursements request by status");
 	List<Reimbursement> reimbs = new ArrayList<>();
 	
 	try {
@@ -166,10 +160,11 @@ public List<Reimbursement> viewAllReimbursementRequests(Status status){
 		preparedStatement.setInt(1, status.getId());
 		ResultSet rs = preparedStatement.executeQuery();	    
 	    mapReimbursements(rs, reimbs);
-		//Log.logger.warn("Exception selecting all Reimbursment", e);
+		
 	}
 	catch (SQLException e) {
 		e.printStackTrace();
+		Log.logger.warn("Exception to view Reimbursement by status", e);
 	}
 	return reimbs;
 		
@@ -180,20 +175,22 @@ public List<Reimbursement> viewAllUsersReimbursementRequests(){
 
   PreparedStatement preparedStatement;
 	
-//	Connection connection = DBConnection.createConnection(); BEFORE
   Connection connection = ReimConnection.getConnection();
 	
-	//log.info("Creating a new account");
 	List<Reimbursement> reimbs = new ArrayList<>();
+	
+
+	log.info("View all user reimbursements by Admin");
 	
 	try {
 		preparedStatement = connection.prepareStatement(sql);
 		ResultSet rs = preparedStatement.executeQuery();	    
 	    mapReimbursements(rs, reimbs);
-		//Log.logger.warn("Exception selecting all Reimbursment", e);
+		
 	}
 	catch (SQLException e) {
 		e.printStackTrace();
+		Log.logger.warn("Exception to view all Reimbursment", e);
 	}
 	return reimbs;
 		
@@ -202,7 +199,6 @@ public List<Reimbursement> viewAllUsersReimbursementRequests(){
 
 
 private User getUser(int userId) throws SQLException{
-	//Connection connection = DBConnection.createConnection();  BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql =    "SELECT ers_user_id, " +
@@ -223,6 +219,9 @@ private User getUser(int userId) throws SQLException{
     stmt.setInt(1, userId);
     
     ResultSet rs = stmt.executeQuery();
+    
+
+	log.info("Selecting user by id");
 
     List<User> users = new ArrayList<>();
     mapUsers(rs, users);
@@ -241,33 +240,6 @@ public User getUserByName(String name) {
 }
 
 
-/*
-public List<Reimbursement> findByAuthorId(int author){
-	try(Connection connection = DBConnection.createConnection()){
-		String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ? ORDER BY R_ID DESC";
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		
-		List<Reimbursement> reimbursementList = new ArrayList<>();
-		
-		while(((ResultSet) preparedStatement).next()) {
-			Reimbursement r = new Reimbursement();
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setDouble(1, request.getAmount());
-			//uses current system time as Timestamp input
-	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-			preparedStatement.setTimestamp(2, author.getSubmitted());
-			preparedStatement.setString(3, author.getDescription());
-			preparedStatement.setInt(4, author.getAuthor().getId());
-			preparedStatement.setInt(5, author.getStatus().getId());
-			preparedStatement.setInt(6, author.getType().getId());
-		}			
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}		
-	return reimbursementList;;
-}
-*/
-
 List<Reimbursement> viewReimbursementsByUserId(int userId) throws SQLException {
     return viewReimbursements("userId", userId);
 }
@@ -277,7 +249,6 @@ public List<Reimbursement> viewReimbursements(String sqlCondition, int id) throw
 }
 
 List<Reimbursement> viewReimbursements(String sqlCondition, String condition) throws SQLException {
-//	Connection connection = DBConnection.createConnection(); BEFORE
 	Connection connection = ReimConnection.getConnection();
     List<Reimbursement> result = new ArrayList<>();
 
@@ -407,7 +378,6 @@ List<Reimbursement> viewReimbursements(String sqlCondition, String condition) th
 
 Role getRoleById(int id) throws SQLException {
 
-//	Connection connection = DBConnection.createConnection();  BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql = "SELECT ers_user_role_id, user_role " +
@@ -416,6 +386,9 @@ Role getRoleById(int id) throws SQLException {
     PreparedStatement stmt = connection.prepareStatement(sql);
     stmt.setInt(1, id);
     ResultSet rs = stmt.executeQuery();
+    
+
+	log.info("Getting user role");
 
     //map ResultSet to User object
     rs.next();
@@ -427,7 +400,6 @@ Role getRoleById(int id) throws SQLException {
 }
 
 private Status getStatus(int statusId) throws SQLException{
-	//Connection connection = DBConnection.createConnection();  BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql = "SELECT reimb_status_id, " +
@@ -439,6 +411,9 @@ private Status getStatus(int statusId) throws SQLException{
     stmt.setInt(1, statusId);
 
     ResultSet rs = stmt.executeQuery();
+    
+
+	log.info("Getting reimbursement status by id");
     
     if (rs.next()) {
         int id = rs.getInt("reimb_status_id");
@@ -453,7 +428,6 @@ private Status getStatus(int statusId) throws SQLException{
 
 List<Status> getStatuses() throws SQLException {
 
-//	Connection connection = DBConnection.createConnection();   BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql = "SELECT reimb_status_id, " +
@@ -465,6 +439,9 @@ List<Status> getStatuses() throws SQLException {
     ResultSet rs = stmt.executeQuery();
 
     List<Status> statuses = new ArrayList<>();
+    
+
+	log.info("Getting all reimbursement status");
 
     while (rs.next()) {
         int id = rs.getInt("reimb_status_id");
@@ -478,7 +455,6 @@ List<Status> getStatuses() throws SQLException {
 }
 
 private Type getType(int typeId) throws SQLException {
-//	Connection connection = DBConnection.createConnection();   BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql = "SELECT reimb_type_id, " +
@@ -490,6 +466,9 @@ private Type getType(int typeId) throws SQLException {
     stmt.setInt(1, typeId);
 
     ResultSet rs = stmt.executeQuery();
+    
+
+	log.info("Selecting reimbursement type by id");
     
     if (rs.next()) {
         int id = rs.getInt("reimb_type_id");
@@ -516,6 +495,9 @@ List<Type> getTypes() throws SQLException {
     ResultSet rs = stmt.executeQuery();
 
     List<Type> types = new ArrayList<>();
+    
+
+	log.info("Selecting all reimbursement type");
 
     while (rs.next()) {
         int id = rs.getInt("reimb_type_id");
@@ -547,6 +529,9 @@ public User getUserByUserName2(String username) {
     stmt.setString(1, username);
 
     ResultSet rs = stmt.executeQuery();
+    
+
+	log.info("Selecting user by username");
 
     if (rs.next()) {
         int id = rs.getInt("ers_user_id");
@@ -561,6 +546,7 @@ public User getUserByUserName2(String username) {
     }catch(SQLException e)
     {
         e.printStackTrace();
+        Log.logger.warn("Exception to view all Reimbursment", e);
     }
 
     return null;
@@ -571,43 +557,46 @@ public static void main(String[] args) throws SQLException {
 	System.out.println(dao.getUserByUserName2("kati"));
 }
 
-public User getUserByUserName(String username) throws SQLException {
-
-	//Connection connection = DBConnection.createConnection();   BEFORE
-	Connection connection = ReimConnection.getConnection();
-
-    String sql =    "SELECT ers_user_id, " +
-                        "ers_username, " +
-                        "ers_password, " +
-                        "user_first_name, " +
-                        "user_last_name, " +
-                        "user_email, " +
-                        "user_role_id, " +
-                        "user_role " +
-                    "FROM ers_user " +
-                        "JOIN ers_user_roles " +
-                            "ON user_role_id = ers_user_role_id " +
-                    "WHERE ers_username = ? " +
-                        "OR user_email = ?";
-
-    PreparedStatement stmt = connection.prepareStatement(sql);
-    
-
-    stmt.setString(1, username);
-    stmt.setString(2, username);
-
-    ResultSet rs = stmt.executeQuery();
-
-    List<User> users = new ArrayList<>();
-    mapUsers(rs, users);
-
-    if (users == null) {
-        return null;
-    }
-    return users.get(0);
-}
+//public User getUserByUserName(String username) throws SQLException {
+//
+//	//Connection connection = DBConnection.createConnection();   BEFORE
+//	Connection connection = ReimConnection.getConnection();
+//
+//    String sql =    "SELECT ers_user_id, " +
+//                        "ers_username, " +
+//                        "ers_password, " +
+//                        "user_first_name, " +
+//                        "user_last_name, " +
+//                        "user_email, " +
+//                        "user_role_id, " +
+//                        "user_role " +
+//                    "FROM ers_user " +
+//                        "JOIN ers_user_roles " +
+//                            "ON user_role_id = ers_user_role_id " +
+//                    "WHERE ers_username = ? " +
+//                        "OR user_email = ?";
+//
+//    PreparedStatement stmt = connection.prepareStatement(sql);
+//    
+//
+//    stmt.setString(1, username);
+//    stmt.setString(2, username);
+//
+//    ResultSet rs = stmt.executeQuery();
+//
+//    List<User> users = new ArrayList<>();
+//    mapUsers(rs, users);
+//
+//    if (users == null) {
+//        return null;
+//    }
+//    return users.get(0);
+//}
 
 private void mapUsers(ResultSet rs, List<User> users) throws SQLException {
+	
+
+	log.info("Mapping user");
 
     while (rs.next()) {
         int id = rs.getInt("ers_user_id");
@@ -629,8 +618,8 @@ private void mapUsers(ResultSet rs, List<User> users) throws SQLException {
 }
 
 private void mapReimbursements(ResultSet rs, List<Reimbursement> reimbursements) throws SQLException {
-	//"(reimb_amount, reimb_submitted, reimb_description, "
-	//		+ "reimb_author, reimb_status_id, reimb_type_id) "
+	
+	log.info("Mapping reimbursement");
 	
     while (rs.next()) {
     	int reimbursement_id = rs.getInt("reimb_id");
@@ -651,7 +640,9 @@ private void mapReimbursements(ResultSet rs, List<Reimbursement> reimbursements)
 
 void hashExistingPassword(User user)throws SQLException {
 
-//	Connection connection = DBConnection.createConnection();  BEFORE
+
+	log.info("Hash password");
+	
 	Connection connection = ReimConnection.getConnection();
 
     String unhashedPass = user.getPassword();
@@ -679,8 +670,7 @@ public String authenticateUser(Login loginBean)
     String userName = loginBean.getUserName();
     String password = loginBean.getPassword();
  
-    //Connection con = null;  BEFORE
-
+   
     Statement statement = null;
     ResultSet resultSet = null;
  
@@ -691,20 +681,16 @@ public String authenticateUser(Login loginBean)
    
     try
     {   	
-     //   con = DBConnection.createConnection();    BEFORE
     	Connection connection = ReimConnection.getConnection();
         System.out.println(connection == null ? "No connection" : "There is connection");
         statement = connection.createStatement();
-       // resultSet = statement.executeQuery("select ers_username,ers_password, ers_role_id from ers_user");
 
         resultSet = statement.executeQuery("select ers_username, ers_password, user_role_id from ers_user");
-      //  ers_user.user_role_id
         
         while(resultSet.next())
         {
             userNameDB = resultSet.getString("ers_username");
             passwordDB = resultSet.getString("ers_password");
-          //  roleDB = resultSet.getInt("ers_role_id");
             roleDB = resultSet.getInt("user_role_id");
             
  
@@ -717,6 +703,7 @@ public String authenticateUser(Login loginBean)
     catch(SQLException e)
     {
         e.printStackTrace();
+        Log.logger.warn("Exception to view all Reimbursment", e);
     }
     return "Invalid user credentials";
 }
