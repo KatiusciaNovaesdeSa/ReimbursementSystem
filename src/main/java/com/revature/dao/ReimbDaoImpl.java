@@ -483,7 +483,6 @@ private Type getType(int typeId) throws SQLException {
 
 List<Type> getTypes() throws SQLException {
 
-//	Connection connection = DBConnection.createConnection();   BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql = "SELECT reimb_type_id, " +
@@ -512,7 +511,6 @@ List<Type> getTypes() throws SQLException {
 
 public User getUserByUserName2(String username) {
 
-	//Connection connection = DBConnection.createConnection();   BEFORE
 	Connection connection = ReimConnection.getConnection();
 
     String sql =    "SELECT ers_user_id, " +

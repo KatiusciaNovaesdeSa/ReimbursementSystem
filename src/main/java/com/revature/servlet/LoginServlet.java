@@ -65,31 +65,3 @@ public class LoginServlet extends HttpServlet {
 	} // End of doPost()
 }
 
-//
-//
-//public class LoginController {
-//	
-//	public static String login(HttpServletRequest request){
-//		if(request.getMethod().equals(FinalUtil.HTTP_Get)) return "index.html";
-//
-//		User loggedUser = UserService.getStaffService().login(
-//				new User(
-//						0, request.getParameter("username"),
-//						request.getParameter("password"), null, null, null, null
-//						));
-//		if (loggedUser.getUsername().equals("")){
-//			return "index.html";
-//		} else{
-//			//REturn another URI and create controller that handles that 
-//			//return "/customer.do"; //The DAO method
-//		}
-//		request.getSession().setAttribute("loggedUser", loggedUser);
-//		if(loggedUser.getRole() == 1){
-//			return "manager.jsp";
-//		}else if (loggedUser.getRole() == 2){
-//			return "employee.jsp";
-//		}
-//		return "index.html";
-//	}
-//
-//}

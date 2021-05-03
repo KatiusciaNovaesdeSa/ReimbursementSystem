@@ -9,14 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Finance decision page</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link href="../css/styles.css" rel="stylesheet" type="text/css">
+<!-- <link href="../css/styles.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
     
-   <br><br>
+   <br><br><br>
    <div align="center" class="container">
      <!--   <table border="1" cellpadding="5" >  --> 
-        <caption><h2>List of Pending Reimbursements</h2></caption>
+        <c:set var="admin" value=" Hello, admin" />
+        <c:out value="${admin}"/>
+        <caption><h2>List of Pending Reimbursements </h2></caption>
         <table class="table table-success table-striped table-hover" >
 	
             <tr>
@@ -48,6 +50,7 @@
                 </tr>
             </c:forEach>
         </table>
+        
     </div>
 </body>
 </html>

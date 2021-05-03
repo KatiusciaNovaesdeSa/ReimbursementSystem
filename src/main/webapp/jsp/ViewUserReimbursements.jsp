@@ -13,7 +13,7 @@
 <br><br>
  <div align="center" class="container">
        <!-- <table border="1" cellpadding="5">  --> 
-       <caption><h2>List of All Reimbursements <c:out value="${reimbursement.authorFullName}" /></h2></caption>      
+        <caption><h2>List of All Reimbursements</h2></caption>      
         <table class="table table-striped table-success table-hover">
             
             <tr>

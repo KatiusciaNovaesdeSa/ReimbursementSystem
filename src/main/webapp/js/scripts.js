@@ -1,6 +1,20 @@
 /*!
     *
     */
+    
+  $(document).ready(function(){
+	var user_name = $('span.element_username').text();
+	var user_id = Number($("#enjin-bar").data("user_id"));
+	if (user_id > 0){
+		document.getElementById("displayUser").innerHTML='Welcome ' + username + '';
+	} else {
+		document.getElementById("displayUser").innerHTML='Welcome Guest';}
+	});
+   
+   
+   $('#cloned_username').html( $('span.element_username').clone());
+   
+   
     (function($) {
     "use strict"; // Start of use strict
   

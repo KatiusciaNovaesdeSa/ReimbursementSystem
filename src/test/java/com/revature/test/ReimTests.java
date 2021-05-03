@@ -45,11 +45,6 @@ public class ReimTests {
 		rs = null;
 	}
 	
-//	@Test(timeout=1000)  // milliseconds
-//    public void test() {
-//	      while (true) {}
-//	}
-	
 	
 	@Test
 	public void testConnection() {
