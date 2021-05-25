@@ -1,10 +1,10 @@
-Expense Reimbursement System
+## Expense Reimbursement System
 
-Project Description
+## Project Description
 
 The Expense Reimbursement System (ERS) manages the process of reimbursing employees for expenses incurred while on company time. Employees can create an account, login and submit reimbursement requests as well as view their past tickets and pending requests. Finance managers can login and view reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve or deny reimbusement requests. Additionally, finance managers must approve newly created accounts before employees can login and start submitting requests.
 
-Technologies Used:
+## Technologies Used:
  
 - Java
 - Servlets
@@ -22,7 +22,7 @@ Technologies Used:
 - JUnit
 - Log4J
 
-Roles and Responsibilities
+## Roles and Responsibilities
 
 - Integrated Bootstrap and CSS with HTML to design an aesthetic web application with intuitive navigation and form submission.
 - Utilized HTML input types to take advantage of efficient, front-end input validation.
@@ -33,9 +33,9 @@ Roles and Responsibilities
 - Implemented the JDBC framework to execute complex queries and support database persistence.
 - Wrote JUnit tests and incorporated consistent logging to validate expected code functionality.
 
-Features
+## Features
 
-Ready to Use
+# Ready to Use
 
 Users can register and login after they are registered.
 When logged in, users based on roles get different dashboards and functionalities.
@@ -43,7 +43,7 @@ Employees can view past tickets and add a new reimbuirsement request.
 Admins can view all reimbursements for all employees and filter requests by status.
 Admins can approve/deny an reimbursement.
 
-To-do-List
+# To-do-List
 
 Email confirmation after registeration
 Passoword encryption
