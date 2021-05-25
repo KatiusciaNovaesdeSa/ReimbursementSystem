@@ -48,6 +48,31 @@ To-do-List
 Email confirmation after registeration
 Passoword encryption
 
+![Screen Shot 2021-05-25 at 1 08 20 PM](https://user-images.githubusercontent.com/54957332/119540739-c59ce700-bd5b-11eb-929b-1f413d6bc94b.png)
+
+![Screen Shot 2021-05-25 at 1 08 40 PM](https://user-images.githubusercontent.com/54957332/119540773-cfbee580-bd5b-11eb-8107-c5d6b740b04b.png)
+
+![Screen Shot 2021-05-25 at 1 08 57 PM](https://user-images.githubusercontent.com/54957332/119540787-d2b9d600-bd5b-11eb-9029-86fd6bbc0cc0.png)
+
+![Screen Shot 2021-05-25 at 1 09 24 PM](https://user-images.githubusercontent.com/54957332/119540803-d8afb700-bd5b-11eb-9f88-d9f8987307bb.png)
+
+![Screen Shot 2021-05-25 at 1 10 38 PM](https://user-images.githubusercontent.com/54957332/119540822-de0d0180-bd5b-11eb-8c3a-2dc96adff699.png)
+
+![Screen Shot 2021-05-25 at 1 11 20 PM](https://user-images.githubusercontent.com/54957332/119540834-e2391f00-bd5b-11eb-95ea-270159664927.png)
+
+![Screen Shot 2021-05-25 at 1 14 24 PM](https://user-images.githubusercontent.com/54957332/119540861-e9f8c380-bd5b-11eb-9c02-bbe0cdf410e6.png)
+
+![Screen Shot 2021-05-25 at 1 15 53 PM](https://user-images.githubusercontent.com/54957332/119540881-eebd7780-bd5b-11eb-9f8f-89712403ebfc.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
