@@ -6,32 +6,33 @@ The Expense Reimbursement System (ERS) manages the process of reimbursing employ
 
 Technologies Used:
  
-Java
-Servlets
-JSP
-HTML
-CSS
-JDBC
-Postgres
-Tomcat Server
-JavaScript
-Ajax
-Json
-PostgreSQL
-Bootstrap
-JUnit
-Log4J
+- Java
+- Servlets
+- JSP
+- HTML
+- CSS
+- JDBC
+- Postgres
+- Tomcat Server
+- JavaScript
+- Ajax
+- Json
+- PostgreSQL
+- Bootstrap
+- JUnit
+- Log4J
 
 Roles and Responsibilities
 
-Integrated Bootstrap and CSS with HTML to design an aesthetic web application with intuitive navigation and form submission.
-Utilized HTML input types to take advantage of efficient, front-end input validation.
-Implemented Servlet Front Controllers to easily insert partial HTML views and minimize redundant code.
-Added dynamic front-end functionality using a combination of JavaScript, JSP and jQuery.
-Executed AJAX GET and POST methods to transfer JSON to and from Java Servlets.
-Used HTML form submission to apply secure user validation within the Java backend.
-Implemented the JDBC framework to execute complex queries and support database persistence.
-Wrote JUnit tests and incorporated consistent logging to validate expected code functionality.
+- Integrated Bootstrap and CSS with HTML to design an aesthetic web application with intuitive navigation and form submission.
+- Utilized HTML input types to take advantage of efficient, front-end input validation.
+- Implemented Servlet Front Controllers to easily insert partial HTML views and minimize redundant code.
+- Added dynamic front-end functionality using a combination of JavaScript, JSP and jQuery.
+- Executed AJAX GET and POST methods to transfer JSON to and from Java Servlets.
+- Used HTML form submission to apply secure user validation within the Java backend.
+- Implemented the JDBC framework to execute complex queries and support database persistence.
+- Wrote JUnit tests and incorporated consistent logging to validate expected code functionality.
+
 Features
 
 Ready to Use
